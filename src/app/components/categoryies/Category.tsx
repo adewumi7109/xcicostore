@@ -8,7 +8,7 @@ function Category() {
     <div className='flex flex-wrap justify-center gap-7 lg:gap-20 py-20 '>
        {categories.map((item, index) => (
           <div 
-             className='lg:w-[200px] md:w-[200px]  w-[89%] h-[150px]  flex flex-col items-center gap-4 justify-center rounded-lg'
+             className='lg:w-[200px] md:w-[200px]  w-[98%] h-[150px]  flex flex-col items-center gap-4 justify-center rounded-lg'
              style={{ backgroundColor: `${item?.color}`, boxShadow: 'rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px' }} 
              key={index}
           >
