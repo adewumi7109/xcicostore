@@ -26,61 +26,61 @@ function Banner({searchQuery, setSearchQuery, setSelectedCategory, selectedCateg
   const openCageApiKey = "1de5a61c55f44749b653deb8e5915f0a";
 
   // Fetch location on component mount
-  useEffect(() => {
-    const handleGetLocation = () => {
-      if (!navigator.geolocation) {
-        setError("Geolocation is not supported by your browser.");
-        return;
-      }
+  // useEffect(() => {
+  //   const handleGetLocation = () => {
+  //     if (!navigator.geolocation) {
+  //       setError("Geolocation is not supported by your browser.");
+  //       return;
+  //     }
 
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const lat = position.coords.latitude;
-          const lon = position.coords.longitude;
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         const lat = position.coords.latitude;
+  //         const lon = position.coords.longitude;
 
-          // Set latitude, longitude
-          setLocation({ latitude: lat, longitude: lon, name: null });
-          setError(null);
+  //         // Set latitude, longitude
+  //         setLocation({ latitude: lat, longitude: lon, name: null });
+  //         setError(null);
 
-          // Fetch the location name using reverse geocoding
-          fetchLocationName(lat, lon);
-        },
-        (err) => {
-          setError(err.message);
-        }
-      );
-    };
+  //         // Fetch the location name using reverse geocoding
+  //         fetchLocationName(lat, lon);
+  //       },
+  //       (err) => {
+  //         setError(err.message);
+  //       }
+  //     );
+  //   };
 
-    handleGetLocation();
-  }, []); // This will run once when the component mounts
+  //   handleGetLocation();
+  // }, []); 
 
   // Function to fetch the location name using OpenCage Geocoding API
-  const fetchLocationName = async (latitude: number, longitude: number) => {
-    try {
-      const response = await fetch(
-        `https://api.opencagedata.com/geocode/v1/json?key=${openCageApiKey}&q=${latitude},${longitude}&pretty=1&no_annotations=1`
-      );
-      const data = await response.json();
+  // const fetchLocationName = async (latitude: number, longitude: number) => {
+  //   try {
+  //     const response = await fetch(
+  //       `https://api.opencagedata.com/geocode/v1/json?key=${openCageApiKey}&q=${latitude},${longitude}&pretty=1&no_annotations=1`
+  //     );
+  //     const data = await response.json();
   
-      if (data.results.length > 0) {
-        // Extract only the state and country components
-        const addressComponents = data.results[0].components;
-        const state = addressComponents.state || "State not found"; // Default to "State not found"
-        const country = addressComponents.country || "Country not found"; // Default to "Country not found"
+  //     if (data.results.length > 0) {
+  //       // Extract only the state and country components
+  //       const addressComponents = data.results[0].components;
+  //       const state = addressComponents.state || "State not found"; // Default to "State not found"
+  //       const country = addressComponents.country || "Country not found"; // Default to "Country not found"
         
-        const locationName = `${state}, ${country}`; // Format as "State, Country"
-        setLocation((prevLocation) => ({
-          ...prevLocation,
-          name: locationName,
-        }));
-      } else {
-        setError("Unable to get location name.");
-      }
-    } catch (error) {
-      setError("Error fetching location name. Please check your API key or network.");
-      console.error(error); // Log error for debugging
-    }
-  };
+  //       const locationName = `${state}, ${country}`; // Format as "State, Country"
+  //       setLocation((prevLocation) => ({
+  //         ...prevLocation,
+  //         name: locationName,
+  //       }));
+  //     } else {
+  //       setError("Unable to get location name.");
+  //     }
+  //   } catch (error) {
+  //     setError("Error fetching location name. Please check your API key or network.");
+  //     console.error(error); // Log error for debugging
+  //   }
+  // };
   
 
   return (
@@ -110,7 +110,7 @@ function Banner({searchQuery, setSearchQuery, setSelectedCategory, selectedCateg
         className="mb-4 p-2 border rounded cursor-pointer outline-none w-full z-10 bg-white"
         value={selectedCategory}
         onChange={(e) => {
-          
+
           setSelectedCategory(e.target.value);
           window.location.href = "#products";
         }}
